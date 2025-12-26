@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* 1. Define your Theme Tokens */
+@theme {
+  /* Fonts: Mapping Next.js variables to Tailwind utilities */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains);
 
-@theme inline {
+  /* Custom Colors based on your images (Zinc/Neutral palette) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-border: var(--border);
+  --color-card: var(--card);
+  --color-muted: var(--muted);
+  
+  /* Adding the subtle radius from the image */
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
 }
 
-@media (prefers-color-scheme: dark) {
+/* 2. Theme Variable Logic (Light/Dark Switch) */
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #ffffff;
+    --foreground: #09090b; /* Zinc 950 */
+    --border: #e4e4e7;     /* Zinc 200 */
+    --card: #ffffff;
+    --muted: #71717a;      /* Zinc 500 */
+  }
+
+  .dark {
+    --background: #09090b; /* Zinc 950 - Pure Dark */
+    --foreground: #fafafa; /* Zinc 50 */
+    --border: #27272a;     /* Zinc 800 - Subtle Borders */
+    --card: #09090b;
+    --muted: #a1a1aa;      /* Zinc 400 */
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased transition-colors duration-300;
+    /* The subtle Grid background from Image #2 */
+    background-image: radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+    background-size: 40px 40px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* 3. Micro-interactions: Custom Utilities */
+@utility hover-glow {
+  &:hover {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.05);
+    border-color: var(--muted);
+  }
 }
