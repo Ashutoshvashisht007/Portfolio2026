@@ -6,7 +6,7 @@ import { FiSun, FiMoon } from "react-icons/fi";
 
 export default function ThemeToggle() {
   const { theme, setTheme } = useTheme();
-  const [playSwitch] = useSound("/sounds/switch.mp3"); // Place in public/sounds/
+  const [playSwitch] = useSound("/sounds/switch.mp3");
 
   return (
     <motion.button

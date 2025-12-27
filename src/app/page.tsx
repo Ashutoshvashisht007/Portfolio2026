@@ -16,8 +16,6 @@ export default function Home() {
   return (
     <div className="space-y-24">
       <Hero />
-
-      {/* Placeholder for Stack Section */}
       <motion.section
         variants={sectionVariants}
         initial="hidden"
@@ -34,12 +32,10 @@ export default function Home() {
           variants={sectionVariants}
           className="border border-dashed border-border rounded-lg text-center text-muted-foreground"
         >
-            {/* Build StackList component to render icons here */}
             <StackList />
         </motion.div>
       </motion.section>
 
-      {/* Placeholder for Projects Section */}
       <motion.section
         variants={sectionVariants}
         initial="hidden"
@@ -56,7 +52,6 @@ export default function Home() {
            variants={sectionVariants}
            className="grid grid-cols-1 md:grid-cols-2 gap-6"
          >
-            {/* Build ProjectCard component and map through data here */}
             <motion.div
               variants={sectionVariants}
               className="h-64 rounded-xl border border-border bg-card/50 p-6"
