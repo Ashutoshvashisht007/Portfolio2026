@@ -1,9 +1,6 @@
 "use client";
 
 import { motion } from "motion/react";
-// import StackList from "@/components/StackList";
-// import ProjectList from "@/components/ProjectList";
-
 import Hero from "@/components/ui/Hero";
 import StackList from "@/components/ui/StackList";
 
@@ -30,7 +27,7 @@ export default function Home() {
         </motion.h3>
         <motion.div
           variants={sectionVariants}
-          className="border border-dashed border-border rounded-lg text-center text-muted-foreground"
+          className="rounded-lg text-center text-muted-foreground"
         >
             <StackList />
         </motion.div>

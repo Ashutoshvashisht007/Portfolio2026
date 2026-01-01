@@ -14,7 +14,7 @@ import Magnetic from "./Magnetic";
 
 const navItems = [
     { path: "/", name: "Home" },
-    { path: "/components", name: "Components" },
+    { path: "/playground", name: "Playground" },
 ];
 
 
