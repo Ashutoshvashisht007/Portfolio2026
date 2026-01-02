@@ -1,8 +1,15 @@
 import BorderHoverButton from "@/app/playground/buttons/BorderHoverButton";
 import SwappingButton from "@/app/playground/buttons/SwappingButton";
 import UploadButton from "@/app/playground/buttons/UploadButton";
-import Grid1 from "@/app/playground/grids/Grid1";
 import OrbSidebar from "@/app/playground/sidebar/OrbSidebar";
+import fs from "fs";
+import path from "path";
+
+const getCode = (relativePath: string) =>
+    fs.readFileSync(
+        path.join(process.cwd(), relativePath),
+        "utf-8"
+    );
 
 export const componentRegistry: Record<string, {
     name: string;
@@ -12,7 +19,6 @@ export const componentRegistry: Record<string, {
         tsxCode: string,
         css?: string;
     };
-    layout?: string;
 }> = {
     "swapping-button": {
         name: "Swapping Animation",
@@ -184,179 +190,6 @@ export default BorderHoverButton`,
         name: "ORB Sidebar",
         description: "ORB Sidebar",
         component: OrbSidebar,
-        code: { tsxCode: `import React, { useState } from "react";
-import { Home, Compass, Bell, MessageSquare, Bookmark, TrendingUp, Menu, X } from "lucide-react";
-
-const Sidebar_Orb = () => {
-  const [isExpanded, setIsExpanded] = useState(false);
-
-  const menuItems = [
-    { id: 1, label: "Home", icon: Home, color: "bg-blue-500" },
-    { id: 2, label: "Explore", icon: Compass, color: "bg-purple-500" },
-    { id: 3, label: "Notifications", icon: Bell, color: "bg-pink-500" },
-    { id: 4, label: "Messages", icon: MessageSquare, color: "bg-green-500" },
-    { id: 5, label: "Bookmarks", icon: Bookmark, color: "bg-orange-500" },
-    { id: 6, label: "Trending", icon: TrendingUp, color: "bg-red-500" },
-  ];
-
-  return (
-    <div className="flex items-center justify-center min-h-screen">
-      <div className="relative">
-        <button
-          onClick={() => setIsExpanded(!isExpanded)}
-          className={
-            "relative z-50 w-16 h-16 rounded-full bg-neutral-400 cursor-pointer hover:bg-neutral-600 shadow-2xl flex items-center justify-center transition-all duration-300 hover:scale-110 " +
-            (isExpanded ? "rotate-90" : "")
-          }
-        >
-          {isExpanded ? <X className="w-6 h-6 text-white" /> : <Menu className="w-6 h-6 text-white" />}
-        </button>
-
-        {menuItems.map((item, index) => {
-          const angle = index * 60 - 90;
-          const radius = 140;
-          const x = Math.cos((angle * Math.PI) / 180) * radius;
-          const y = Math.sin((angle * Math.PI) / 180) * radius;
-
-          return (
-            <div
-              key={item.id}
-              className={
-                "absolute z-40 top-0 left-0 transition-all duration-500 ease-out " +
-                (isExpanded ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none")
-              }
-              style={{
-                transform: isExpanded ? "translate(" + x + "px, " + y + "px)" : "translate(0, 0)",
-                transitionDelay: isExpanded ? index * 50 + "ms" : "0ms",
-              }}
-            >
-              <div className="relative group">
-                <button className={"w-12 h-12 rounded-full " + item.color + " shadow-lg flex items-center justify-center transition-all duration-300 hover:scale-125"}>
-                  <item.icon className="w-5 h-5 text-white" />
-                </button>
-
-                <div className="absolute left-full ml-3 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
-                  <div className="bg-white text-gray-800 px-3 py-1.5 rounded-lg shadow-xl text-sm font-medium whitespace-nowrap">
-                    {item.label}
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-
-        {isExpanded && (
-          <div className="fixed inset-0 bg-black/10 backdrop-blur-lg z-30" onClick={() => setIsExpanded(false)} />
-        )}
-      </div>
-    </div>
-  );
-};
-
-export default Sidebar_Orb;` }
-    },
-    "grid-1":{
-        name: "grid",
-        component: Grid1,
-        description: "A bento grid inspired from manupaaji",
-        code: {
-            tsxCode: `const BentoGridItem = ({
-  title,
-  idx,
-  description,
-  imageSrc,
-  span,
-}: {
-  title: string;
-  idx: number;
-  description: string;
-  imageSrc: string;
-  span: string;
-}) => {
-  const imageStyles: Record<number, string> = {
-    1: "absolute -right-4 rounded-lg",
-    2: "absolute left-0 rounded-b-lg",
-    3: "absolute -left-4 rounded-lg",
-    5: "rounded-lg",
-  };
-
-  return (
-    <div
-      className={
-        "bg-neutral-800 rounded-xl p-5 shadow-lg flex h-100 flex-col justify-between overflow-hidden relative " +
-        span +
-        " transform transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl group cursor-pointer " +
-        (idx === 3 ? "flex items-center justify-center" : "")
-      }
-    >
-      <div className="mb-4">
-        <h3 className="text-xl group-hover:translate-x-2 font-bold text-white transition-all duration-300">
-          {title}
-        </h3>
-        <p className="text-gray-400 group-hover:translate-x-4 mt-1 text-sm transition-all duration-300">
-          {description}
-        </p>
-      </div>
-
-      <div className="grow pt-4">
-        {idx === 4 ? (
-          <>
-            <img
-              src="/images/bento-4.png"
-              className="absolute w-[70%] group-hover:-rotate-4 transition-all duration-300 left-4 top-24 rounded-xl shadow-xl"
-            />
-
-            <img
-              src="/images/bento-4.png"
-              className="absolute w-[45%] group-hover:rotate-4 transition-all duration-300 -right-2 -bottom-6 rounded-xl shadow-lg"
-            />
-          </>
-        ) : (
-          <img
-            src={imageSrc}
-            alt={title}
-            className={
-              "w-full h-auto object-cover transition-transform duration-500 group-hover:rotate-1 hover:shadow-xl " +
-              (imageStyles[idx] ?? "")
-            }
-            style={{ minHeight: "150px" }}
-          />
-        )}
-      </div>
-    </div>
-  );
-};
-
-function Grid1() {
-  const gridItems = GridItems;
-
-  return (
-    <div className="min-h-screen p-8 sm:p-12">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-3 max-w-7xl mx-auto">
-        {gridItems.map((item, index) => (
-          <BentoGridItem
-            key={index}
-            idx={item.id}
-            title={item.title}
-            description={item.description}
-            imageSrc={item.imageSrc}
-            span={
-              index >= 3
-                ? index === 3
-                  ? "md:col-span-2"
-                  : "md:col-span-1"
-                : "md:col-span-1"
-            }
-          />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-export default Grid1;
-`
-        },
-        layout: "wide",
+        code: { tsxCode: getCode("app/playground/sidebar/OrbSidebar") }
     }
 };

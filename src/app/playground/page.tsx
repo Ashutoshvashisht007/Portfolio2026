@@ -4,7 +4,6 @@ import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
-// 1. Data Structure for your Playground
 const categories = [
   {
     title: "Buttons",
@@ -12,7 +11,7 @@ const categories = [
     items: [
       { name: "Swapping Button", status: "Stable", id: "btn-1", slug: "swapping-button" },
       { name: "Upload Button", status: "New", id: "btn-2", slug: "upload-button" },
-      { name: "Elastic Bounce", status: "Beta", id: "btn-3", slug: "swapping-button" },
+      { name: "Border Hover", status: "Beta", id: "btn-3", slug: "border-hover-button" },
     ],
   },
   {
@@ -24,10 +23,18 @@ const categories = [
     ],
   },
   {
-    title: "Bento Grids",
-    description: "Complex layouts inspired by modern dashboards.",
+    title: "Side Bar",
+    description: "Complex layouts inspired by modern Sidebars.",
     items: [
-      { name: "Linear Style", status: "New", id: "bento-1", slug: "swapping-button" },
+      { name: "Orb Sidebar", status: "New", id: "sidebar-1", slug: "orb-sidebar" },
+      { name: "Feature Highlight", status: "Stable", id: "bento-2", slug: "swapping-button" },
+    ],
+  },
+  {
+    title: "Bento Grids",
+    description: "Complex layouts inspired by modern Sidebars.",
+    items: [
+      { name: "Grid", status: "New", id: "grid-1", slug: "grid-1" },
       { name: "Feature Highlight", status: "Stable", id: "bento-2", slug: "swapping-button" },
     ],
   },
@@ -35,7 +42,7 @@ const categories = [
 
 export default function PlaygroundPage() {
   return (
-    <div className="space-y-20 mt-24 mb-20 px-4 md:px-0">
+    <div className="space-y-15 mt-24 mb-20 px-4 md:px-0">
       <header className="space-y-4">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />
@@ -46,7 +53,7 @@ export default function PlaygroundPage() {
         </p>
       </header>
 
-      <div className="space-y-24">
+      <div className="space-y-14">
         {categories.map((category, index) => (
           <section key={category.title} className="space-y-8">
             <div className="space-y-2">
@@ -75,7 +82,6 @@ export default function PlaygroundPage() {
   );
 }
 
-// 2. The Interactive Component Card
 function ComponentCard({ name, status, slug }: { name: string; status: string, slug: string }) {
   return (
     <Link href={`/playground/${slug}`}>
