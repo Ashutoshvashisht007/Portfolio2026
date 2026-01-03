@@ -38,14 +38,14 @@ export default function Navbar() {
     });
 
     return (
-        <div className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none pt-1">
+        <div className="fixed top-0 inset-x-0 z-50 flex justify-center pointer-events-none py-2 max-w-3xl mx-auto">
             <motion.header
                 initial={false}
                 animate={{
-                    width: isMobile ? "98%" : isScrolled ? "50%" : "100%",
-                    maxWidth: isMobile ? "98%" : isScrolled ? "600px" : "720px",
-                    paddingLeft: isScrolled ? "8px" : "16px",
-                    paddingRight: isScrolled ? "8px" : "16px",
+                    width: isMobile ? "100%" : isScrolled ? "80%" : "100%",
+                    maxWidth: isMobile ? "100%" : isScrolled ? "600px" : "720px",
+                    paddingLeft: isScrolled ? "8px" : "0px",
+                    paddingRight: isScrolled ? "8px" : "0px",
                     paddingTop: isScrolled ? "4px" : "12px",
                     paddingBottom: isScrolled ? "4px" : "12px",
                     borderRadius: isScrolled ? "24px" : "12px",
@@ -61,8 +61,8 @@ export default function Navbar() {
                 )}
             >
                 <nav className="flex items-center justify-between w-full">
-                    <Link href="/" className="font-bold text-lg tracking-tight px-2">
-                        <span className="text-foreground flex gap-1">
+                    <Link href="/" className="font-bold text-lg tracking-tights">
+                        <span className="text-foreground flex gap-1 px-2">
                             Ashutosh
                             <span className="hidden sm:inline text-muted-foreground">
                                 Anand Sharma

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export const GridItems = [
   {
     id: 1,
@@ -66,18 +68,20 @@ const BentoGridItem = ({ title, idx, description, imageSrc, span }: { title: str
             <div className="grow pt-4">
                 {idx === 4 ? (
                     <>
-                        <img
+                        <Image
                             src="/images/bento-4.png"
+                            alt="img"
                             className="absolute w-[70%] group-hover:-rotate-4 transition-all duration-300 left-4 top-24 rounded-xl shadow-xl"
                         />
 
-                        <img
+                        <Image
                             src="/images/bento-4.png"
+                            alt="img"
                             className="absolute w-[45%] group-hover:rotate-4 transition-all duration-300 -right-2 -bottom-6 rounded-xl shadow-lg"
                         />
                     </>
                 ) : (
-                        <img
+                        <Image
                             src={imageSrc}
                             alt={title}
                             className={`w-full h-auto object-cover transition-transform duration-500 group-hover:rotate-1 hover:shadow-xl ${imageStyles[idx] ?? ''} `}

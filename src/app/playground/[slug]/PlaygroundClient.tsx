@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import { FiArrowLeft } from "react-icons/fi";
-import { componentRegistry } from "@/lib/registry";
+import { ComponentImport, componentRegistry } from "@/lib/registry";
 import CodeBlock from "@/components/ui/CodeBlock";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
 
 interface PlaygroundClientProps {
   slug: string;
@@ -20,11 +21,17 @@ export default function PlaygroundClient({ slug, name, description, code }: Play
   useEffect(() => setMounted(true), []);
   const registryItem = componentRegistry[slug];
   const layout = registryItem?.layout || "standard";
-  const SelectedComponent = registryItem.component;
+  const SelectedComponent = useMemo(
+  () =>
+    dynamic(registryItem.componentImport, {
+      ssr: false,
+    }),
+  [registryItem.componentImport]
+);
 
   const widthClasses = {
     standard: "max-w-3xl",
-    wide: "max-w-7xl",
+    wide: "max-w-5xl",
     full: "max-w-[95vw]",
   };
   // "mt-24 space-y-12 pb-20 max-w-5xl mx-auto px-6"

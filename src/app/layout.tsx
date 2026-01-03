@@ -13,11 +13,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body className={`${inter.variable} ${mono.variable} font-sans`}>
         <Providers>
           {/* <PhysicsScene /> */}
+          <Navbar />
           <div className="relative z-20">
-          <div className="max-w-3xl mx-auto px-6 py-2">
-            <Navbar />
-            {children}
-          </div>
+            {/* <div className="max-w-3xl mx-auto px-6 py-2">
+              <Navbar /> */}
+              {children}
+            {/* </div> */}
           </div>
         </Providers>
       </body>

@@ -42,7 +42,7 @@ const categories = [
 
 export default function PlaygroundPage() {
   return (
-    <div className="space-y-15 mt-24 mb-20 px-4 md:px-0">
+    <div className="space-y-15 mt-24 mb-20 px-6 py-2 max-w-3xl mx-auto">
       <header className="space-y-4">
         <div className="flex items-center gap-2">
           <span className="w-2 h-2 rounded-full bg-blue-500 animate-pulse" />

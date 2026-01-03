@@ -1,12 +1,12 @@
-import BorderHoverButton from "@/app/playground/buttons/BorderHoverButton";
-import SwappingButton from "@/app/playground/buttons/SwappingButton";
-import UploadButton from "@/app/playground/buttons/UploadButton";
-import Grid1 from "@/app/playground/grids/Grid1";
-import OrbSidebar from "@/app/playground/sidebar/OrbSidebar";
+import type { ComponentType } from "react";
+
+export type ComponentImport = () => Promise<{
+  default: ComponentType<any>;
+}>;
 
 export const componentRegistry: Record<string, {
     name: string;
-    component: React.ComponentType;
+    componentImport: ComponentImport;
     description: string;
     code: {
         tsxCode: string,
@@ -17,7 +17,7 @@ export const componentRegistry: Record<string, {
     "swapping-button": {
         name: "Swapping Animation",
         description: "A split-content button where the arrow slides right and the label shifts left on hover, creating a smooth directional swap.",
-        component: SwappingButton,
+        componentImport: ()=> import("@/app/playground/buttons/SwappingButton"),
         code: {
             tsxCode: `import React from 'react'
     
@@ -72,7 +72,7 @@ export default SwappingButton;
     "upload-button": {
         name: "Upload Button Animation",
         description: "A hover-triggered upload button where a new background reveals via clip-path, accompanied by an animated upload icon.",
-        component: UploadButton,
+        componentImport: ()=> import("@/app/playground/buttons/UploadButton"),
         code: {
             tsxCode: `import { Upload } from 'lucide-react'
 
@@ -96,7 +96,7 @@ export default Button_Upload` },
     "border-hover-button": {
         name: "Hover Border Button",
         description: "A button with a tracing border animation that completes the full rectangle on hover, combined with a left-to-right background reveal using clip-path.",
-        component: BorderHoverButton,
+        componentImport: ()=> import("@/app/playground/buttons/BorderHoverButton"),
         code: {
             tsxCode: `
 const BorderHoverButton = () => {
@@ -183,7 +183,7 @@ export default BorderHoverButton`,
     "orb-sidebar": {
         name: "ORB Sidebar",
         description: "ORB Sidebar",
-        component: OrbSidebar,
+        componentImport: ()=> import("@/app/playground/sidebar/OrbSidebar"),
         code: { tsxCode: `import React, { useState } from "react";
 import { Home, Compass, Bell, MessageSquare, Bookmark, TrendingUp, Menu, X } from "lucide-react";
 
@@ -257,7 +257,7 @@ export default Sidebar_Orb;` }
     },
     "grid-1":{
         name: "grid",
-        component: Grid1,
+        componentImport: ()=> import("@/app/playground/grids/Grid1"),
         description: "A bento grid inspired from manupaaji",
         code: {
             tsxCode: `const BentoGridItem = ({

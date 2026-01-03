@@ -3,11 +3,10 @@
 import { motion } from "motion/react";
 import Hero from "@/components/ui/Hero";
 import StackList from "@/components/ui/StackList";
+import { sectionVariants, projects } from "@/lib/data";
+import ProjectCard from "@/components/ui/ProjectCard";
 
-const sectionVariants = {
-  hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.8 } },
-};
+
 
 export default function Home() {
   return (
@@ -29,7 +28,7 @@ export default function Home() {
           variants={sectionVariants}
           className="rounded-lg text-center text-muted-foreground"
         >
-            <StackList />
+          <StackList />
         </motion.div>
       </motion.section>
 
@@ -39,29 +38,22 @@ export default function Home() {
         whileInView="show"
         viewport={{ once: true }}
       >
-         <motion.h3
-           variants={sectionVariants}
-           className="text-2xl font-bold mb-6"
-         >
-           Featured Projects
-         </motion.h3>
-         <motion.div
-           variants={sectionVariants}
-           className="grid grid-cols-1 md:grid-cols-2 gap-6"
-         >
-            <motion.div
-              variants={sectionVariants}
-              className="h-64 rounded-xl border border-border bg-card/50 p-6"
-            >
-              Project 1 Card
-            </motion.div>
-            <motion.div
-              variants={sectionVariants}
-              className="h-64 rounded-xl border border-border bg-card/50 p-6"
-            >
-              Project 2 Card
-            </motion.div>
-         </motion.div>
+        <motion.h3
+          variants={sectionVariants}
+          className="text-2xl font-bold mb-6"
+        >
+          Featured Projects
+        </motion.h3>
+        <motion.div
+          variants={sectionVariants}
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
+          {
+            projects.map((project,idx) => (
+              <ProjectCard key={`${project.title}-${idx}`} {...project} />
+            ))
+          }
+        </motion.div>
       </motion.section>
     </div>
   );
